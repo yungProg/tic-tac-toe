@@ -37,4 +37,9 @@ class Board
     end
     false
   end
+
+  def full?
+    display if @grid.all?
+    @grid.all?
+  end
 end

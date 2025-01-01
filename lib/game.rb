@@ -18,12 +18,17 @@ class Game
     @board.place_mark(position, @current_player.mark)
   end
 
-  def play
+  def play # rubocop:disable Metrics/MethodLength
     loop do
       @board.display
       confirm_position
       if @board.check_winner
         puts "#{@current_player.name} won!"
+        play_again?
+        break
+      end
+      if @board.full?
+        puts 'It is a tie!'
         play_again?
         break
       end
