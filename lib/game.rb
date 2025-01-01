@@ -9,13 +9,22 @@ class Game
     @current_player = @player1
   end
 
+  def confirm_position
+    position = @current_player.move
+    until @board.valid_move?(position)
+      puts 'Invalid move. Please try again.'
+      position = @current_player.move
+    end
+    @board.place_mark(position, @current_player.mark)
+  end
+
   def play
     loop do
       @board.display
-      position = current_player.move
-      @board.place_mark(position, @current_player.mark) if @board.valid_move?(position)
+      confirm_position
       if @board.check_winner
         puts "#{@current_player.name} won!"
+        play_again?
         break
       end
       switch_player
@@ -27,8 +36,12 @@ class Game
   end
 
   def play_again?
-    puts 'Do you want to replay?'
+    puts 'Do you want to replay? [Yes/No]'
     replay = gets.chomp
-    play if replay == 'Yes'
+    return unless replay == 'Yes'
+
+    @board = Board.new
+    @current_player = @player1
+    play
   end
 end

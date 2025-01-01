@@ -10,7 +10,7 @@ class Player
   end
 
   def move
-    puts "#{@name}, enter a number between 0 and 8 to make your move."
+    p "#{@name}, enter a number between 0 and 8 to make your move."
     gets.chomp.to_i
   end
 end
