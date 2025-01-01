@@ -11,7 +11,7 @@ class Board
     @grid.each_slice(3) do |row|
       row.each do |col_index|
         color = col_index.nil? ? :white : col_index == 'X' ? :red : :blue # rubocop:disable Style/NestedTernaryOperator
-        col_index.nil? ? (print 'R '.colorize(:color)) : print("#{col_index} ".colorize(color))
+        col_index.nil? ? (print '? '.colorize(:color)) : print("#{col_index} ".colorize(color))
       end
       puts
     end
